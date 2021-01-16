@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticProps, GetStaticPaths, GetStaticPropsResult, GetStaticPropsContext } from 'next'
 import Layout from '../../components/layout'
 
 export type PostData = {
@@ -35,12 +35,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  if (params === undefined) return { notFound: true };
+
   const post = dummyPosts.find(post => post.slug === params.slug);
-  return {
-    props: {
-      post
-    }
-  }
+
+  if (post === undefined) return { notFound: true };
+
+  return { props: { post } };
 }
 
 export const Post: FC<Props> = ({ post }) => {

@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import Link from 'next/link'
 
-export default function Layout({ children }) {
+export const Layout: FC<{}> = ({ children }) => {
   return (
     <>
       <header>This is a header</header>
@@ -11,4 +12,6 @@ export default function Layout({ children }) {
       <footer>This is a footer</footer>
     </>
   );
-}
+};
+
+export default Layout;
